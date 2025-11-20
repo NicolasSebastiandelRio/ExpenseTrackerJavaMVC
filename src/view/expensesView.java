@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class expensesView extends JFrame {
+public class ExpensesView extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private JLabel titleLabel;
@@ -19,8 +19,8 @@ public class expensesView extends JFrame {
     private JButton addButton;
     private JButton clearButton;
 
-    public expensesView() {
-        setTitle("Expense Tracker");
+    public ExpensesView() {
+        setTitle("Expense Tracker - Nicolas del Rio");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -78,7 +78,6 @@ public class expensesView extends JFrame {
         main.add(dateLabel, gbc);
 
         dateField = new JTextField(12);
-        dateField.setText("YYYY-MM-DD");
         gbc.gridx = 1;
         main.add(dateField, gbc);
 
