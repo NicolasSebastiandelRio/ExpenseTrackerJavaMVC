@@ -19,6 +19,8 @@ public class ExpensesView extends JFrame {
     private JButton addButton;
     private JButton clearButton;
 
+    private JButton viewAllButton;
+
     public ExpensesView() {
         setTitle("Expense Tracker - Nicolas del Rio");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +69,7 @@ public class ExpensesView extends JFrame {
         gbc.gridy = 3;
         main.add(categoryLabel, gbc);
 
-        categoryBox = new JComboBox<>(new String[] { "Food", "Transport", "Utilities", "Entertainment", "Investment", "Other" });
+        categoryBox = new JComboBox<>(new String[] { "","Food", "Transport", "Utilities", "Entertainment", "Investment", "Other" });
         gbc.gridx = 1;
         main.add(categoryBox, gbc);
 
@@ -85,13 +87,17 @@ public class ExpensesView extends JFrame {
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         addButton = new JButton("Add Expense");
         clearButton = new JButton("Clear Fields");
+        viewAllButton = new JButton("View All Expenses");
+        buttons.add(viewAllButton);
         buttons.add(addButton);
         buttons.add(clearButton);
+
 
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
         main.add(buttons, gbc);
+
 
         setContentPane(main);
         pack();
@@ -123,6 +129,11 @@ public class ExpensesView extends JFrame {
         return clearButton;
     }
 
+
+    public JButton getViewAllButton() {
+        return viewAllButton;
+    }
+
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
@@ -131,7 +142,7 @@ public class ExpensesView extends JFrame {
         descriptionField.setText("");
         amountField.setText("");
         categoryBox.setSelectedIndex(0);
-        dateField.setText("YYYY-MM-DD");
+        dateField.setText("");
     }
 
     public void setAddButtonListener(ActionListener listener) {
