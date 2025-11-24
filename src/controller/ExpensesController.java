@@ -5,12 +5,15 @@ import view.ExpensesView;
 import view.ExpensesTableView;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class ExpensesController {
     private ExpensesView view;
     private ExpensesTableView tableView;
+    private ExpenseDAO expenseDAO;
     public ExpensesController(ExpensesView view) {
         this.view = view;
+        this.expenseDAO = new ExpenseDAO();
         initController();
     }
 
@@ -34,16 +37,15 @@ public class ExpensesController {
 
         try {
             double price = Double.parseDouble(priceText);
-
-            // 2. Convertir el Texto a LocalDate
-            LocalDate dateObj = LocalDate.parse(date); 
-
+            LocalDate dateObj = LocalDate.parse(date); //parseo fecha a localDate
             Expense expense = new Expense(description, price, category, dateObj);
-            
-            view.showMessage("Expense added: " + expense);
+            if(expenseDAO.saveExpense(expense) == false){
+                view.showMessage("Error saving expense to database.");
+                return;
+            }else{
+                view.showMessage("Expense saved to database successfully.");
+            }
             view.clearFields();
-            ExpenseDAO expenseDAO = new ExpenseDAO();
-            expenseDAO.saveExpense(expense);
         } catch (NumberFormatException e) {
             view.showMessage("Error: Price must be a valid number.");
         } catch (DateTimeParseException e) {
@@ -51,9 +53,30 @@ public class ExpensesController {
         }
     }
 
-        private Object openListView() {
-        tableView = new ExpensesTableView();
+        private void openListView() {
+            if(tableView == null){
+                tableView = new ExpensesTableView();
+            }
+        tableView.setBackButtonListener(e ->{
+            tableView.setVisible(false);
+            view.setVisible(true);
+        });
+        loadExpensesIntoTable();//Cargar los datos de la BD en la tabla
         tableView.setVisible(true);
-        return tableView;
+        view.setVisible(false);
+    }
+
+    public void loadExpensesIntoTable() {
+        tableView.clearTable();//limpio tabla en caso de que tuviese datos viejos
+        List <Expense> expenses = expenseDAO.getAllExpenses();
+        for (Expense expense : expenses) {
+            tableView.addExpenseRow(new Object[]{
+                "N/A", // ID is not implemented in Expense model YET
+                expense.getDescription(),
+                "$"+expense.getPrice(),
+                expense.getCategory(),
+                expense.getDate()
+            });
+        }
     }
 }
