@@ -1,5 +1,6 @@
 package controller;
 import model.Expense;
+import model.modelDAO.ExpenseDAO;
 import view.ExpensesView;
 import view.ExpensesTableView;
 import java.time.LocalDate;
@@ -22,34 +23,30 @@ public class ExpensesController {
 
     private void addExpense() {
         String description = view.getDescriptionField().getText();
-        String amountText = view.getPriceField().getText();
+        String priceText = view.getPriceField().getText();
         String category = (String) view.getCategoryBox().getSelectedItem();
         String date = view.getDateField().getText();
 
-        if (description.isEmpty() || amountText.isEmpty() || date.isEmpty() || category.matches("")) {
+        if (description.isEmpty() || priceText.isEmpty() || date.isEmpty() || category.matches("")) {
             view.showMessage("Please fill in all fields.");
             return;
         }
 
         try {
-            // 1. Convertir el Texto a Double
-            double amount = Double.parseDouble(amountText);
+            double price = Double.parseDouble(priceText);
 
             // 2. Convertir el Texto a LocalDate
-            // Esto convierte "2023-10-20" en un objeto Fecha real
             LocalDate dateObj = LocalDate.parse(date); 
 
-            // 3. Crear el objeto Expense usando los tipos correctos
-            Expense expense = new Expense(description, amount, category, dateObj);
+            Expense expense = new Expense(description, price, category, dateObj);
             
-            // Éxito
             view.showMessage("Expense added: " + expense);
             view.clearFields();
-                    // DB implementation to save the expense inserted. 
+            ExpenseDAO expenseDAO = new ExpenseDAO();
+            expenseDAO.saveExpense(expense);
         } catch (NumberFormatException e) {
-            view.showMessage("Error: Amount must be a valid number.");
+            view.showMessage("Error: Price must be a valid number.");
         } catch (DateTimeParseException e) {
-            // Capturamos el error si la fecha está mal escrita
             view.showMessage("Error: Date must be in format YYYY-MM-DD (e.g., 2025-11-20).");
         }
     }

@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Expense {
     private String description;
-    private double amount;
+    private double price;
     private String category;
     private LocalDate date;
 
-    public Expense(String description, double amount, String category, LocalDate date) {
+    public Expense(String description, double price, String category, LocalDate date) {
         this.description = description;
-        this.amount = amount;
+        this.price = price;
         this.category = category;
         this.date = date;
     }
@@ -18,8 +18,8 @@ public class Expense {
     public String getDescription() {
         return description;
     }
-    public double getAmount() {
-        return amount;
+    public double getPrice() {
+        return price;
     }
     public String getCategory() {
         return category;
@@ -32,8 +32,8 @@ public class Expense {
         this.description = description;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setCategory(String category) {
@@ -46,7 +46,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "expense [description=" + description + ", amount= $" + amount + ", category=" + category + ", date="
+        return "expense [description=" + description + ", price= $" + price + ", category=" + category + ", date="
                 + date + "]";
     }
 }
