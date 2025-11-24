@@ -22,7 +22,7 @@ public class ExpensesController {
 
     private void addExpense() {
         String description = view.getDescriptionField().getText();
-        String amountText = view.getAmountField().getText();
+        String amountText = view.getPriceField().getText();
         String category = (String) view.getCategoryBox().getSelectedItem();
         String date = view.getDateField().getText();
 

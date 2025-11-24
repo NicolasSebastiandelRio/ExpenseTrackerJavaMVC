@@ -10,8 +10,8 @@ public class ExpensesView extends JFrame {
     private JLabel titleLabel;
     private JLabel descriptionLabel;
     private JTextField descriptionField;
-    private JLabel amountLabel;
-    private JTextField amountField;
+    private JLabel priceLabel;
+    private JTextField priceField;
     private JLabel categoryLabel;
     private JComboBox<String> categoryBox;
     private JLabel dateLabel;
@@ -53,15 +53,15 @@ public class ExpensesView extends JFrame {
         gbc.gridx = 1;
         main.add(descriptionField, gbc);
 
-        // Amount row
-        amountLabel = new JLabel("Amount:");
+        // Price row
+        priceLabel = new JLabel("Price:");
         gbc.gridx = 0;
         gbc.gridy = 2;
-        main.add(amountLabel, gbc);
+        main.add(priceLabel, gbc);
 
-        amountField = new JTextField(12);
+        priceField = new JTextField(12);
         gbc.gridx = 1;
-        main.add(amountField, gbc);
+        main.add(priceField, gbc);
 
         // Category row
         categoryLabel = new JLabel("Category:");
@@ -109,8 +109,8 @@ public class ExpensesView extends JFrame {
         return descriptionField;
     }
 
-    public JTextField getAmountField() {
-        return amountField;
+    public JTextField getPriceField() {
+        return priceField;
     }
 
     public JComboBox<String> getCategoryBox() {
@@ -140,7 +140,7 @@ public class ExpensesView extends JFrame {
 
     public void clearFields() {
         descriptionField.setText("");
-        amountField.setText("");
+        priceField.setText("");
         categoryBox.setSelectedIndex(0);
         dateField.setText("");
     }

@@ -38,7 +38,7 @@ public class ExpensesTableView extends JFrame {
         filterPanel.add(filterButton);
         add(filterPanel, java.awt.BorderLayout.NORTH);
         // center panel - table
-        String[] columnNames = {"ID", "Amount", "Category", "Date", "Description"};
+        String[] columnNames = {"ID", "Price", "Category", "Date", "Description"};
         tableModel = new DefaultTableModel(columnNames, 0);
         expensesTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(expensesTable);
