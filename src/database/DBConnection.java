@@ -10,7 +10,7 @@ public class DBConnection {
     private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String url = "jdbc:sqlserver://localhost:1433;databaseName=expenses_db;encrypt=true;trustServerCertificate=true;";
     private static final String user = "sa";
-    private static final String password = "asdjh7314";
+    private static final String password = "123456";
 
     public static Connection connect() {
         Connection conn = null;
