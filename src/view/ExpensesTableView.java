@@ -70,5 +70,26 @@ public class ExpensesTableView extends JFrame {
     public void setBackButtonListener(java.awt.event.ActionListener listener) {
         backButton.addActionListener(listener);
     }
+    public JTable getExpensesTable() {
+        return expensesTable;
+    }
+    public DefaultTableModel getTableModel() {
+        return tableModel;
+    }
+    public JComboBox<String> getCategoryFilterComboBox() {
+        return categoryFilterComboBox;
+    }
+    public JTextField getMonthFilterTextField() {
+        return monthFilterTextField;
+    }
+    public JTextField getYearFilterTextField() {
+        return yearFilterTextField;
+    }
+    public JButton getFilterButton() {
+        return filterButton;
+    }
+    public JButton getBackButton() {
+        return backButton;
+    }
 
 }
