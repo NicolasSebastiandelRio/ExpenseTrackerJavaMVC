@@ -1,62 +1,87 @@
 # 💰 Expenses Tracker
 
-A robust desktop application designed to track personal finances, built with **Java** and **Swing**. This project demonstrates the implementation of the **Model-View-Controller (MVC)** architectural pattern to ensure code modularity, scalability, and maintainability.
+A robust desktop application designed to track personal finances, built with **Java** and **Swing**. This project demonstrates the implementation of the **Model-View-Controller (MVC)** architectural pattern and **JDBC** for database connectivity.
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
+![MVC](https://img.shields.io/badge/Pattern-MVC-blue?style=for-the-badge)
 
 ## 📋 Project Overview
 
-The **Expenses Tracker** allows users to log daily expenditures efficiently. The primary goal of this project is to provide a functional tool for personal finance management while serving as a practical example of layered programming and desktop application development in Java.
-
-## 🏗️ Architecture (MVC)
-
-The project is strictly organized following the **MVC Pattern**, decoupling the user interface from the business logic:
-
-  * **📂 Model :** Manages the data logic. Defines the `Expense` entity with attributes like description, amount, category, and date.
-  * **📂 View :** Handles the UI using **Java Swing**. It displays the forms and captures user input without processing it.
-  * **📂 Controller :** Acts as the intermediary. It listens to events from the View, processes the data, and updates the Model.
+The **Expenses Tracker** allows users to log daily expenditures and view historical data. Unlike simple file-based apps, this project persists data into a **SQL Server** database, allowing for advanced filtering and data management.
 
 ## 🚀 Features
 
-  * **Add Expenses:** Intuitive form to input description, amount, category, and date.
-  * **Categorization:** Pre-defined categories (Food, Transport, Services, Leisure, Education).
-  * **Data Validation:** Basic input validation to ensure data integrity.
-  * **Scalable Design:** Built ready for future database integration.
+* **Add Expenses:** Form validation for description, price, category, and date.
+* **Persist Data:** Saves records securely to a SQL Server database.
+* **View History:** Displays all registered expenses in a tabular view.
+* **Advanced Filtering:** Filter the expenses list by **Category**, **Month**, and **Year**.
+* **Error Handling:** Robust error management for invalid inputs and database connection issues.
 
-## 🛠️ Technologies Used
+## 🏗️ Architecture (MVC + DAO)
 
-  * **Language:** Java (JDK 17+)
-  * **GUI Framework:** Java Swing (AWT/Swing)
-  * **IDE:** Visual Studio Code / Eclipse
-  * **Version Control:** Git & GitHub
+The project follows strict software engineering principles:
 
-## 💻 How to Run
+* **Model (`model`):** Represents the data (`Expense` object).
+* **View (`view`):** The UI built with **Java Swing** (`ExpensesView`, `ExpensesTableView`).
+* **Controller (`controller`):** Handles logic and user events (`ExpensesController`).
+* **DAO (`model.modelDAO`):** The **Data Access Object** pattern separates the SQL logic from the business logic.
+
+## 🛠️ Prerequisites
+
+* Java JDK 11 or higher.
+* Microsoft SQL Server (Express or Standard).
+* VS Code or Eclipse IDE.
+* **Microsoft JDBC Driver for SQL Server** (Included in `lib/` folder).
+
+## ⚙️ Setup & Installation
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/nicolassebastiandelrio/ExpenseTrackerJavaMVC.git
+    git clone [https://github.com/nicolassebastiandelrio/ExpenseTrackerJavaMVC.git](https://github.com/nicolassebastiandelrio/ExpenseTrackerJavaMVC.git)
     ```
-2.  **Open in your IDE:**
-      * **VS Code:** Open the folder and ensure the "Extension Pack for Java" is installed.
-      * **Eclipse:** `File` \> `Open Projects from File System`.
-3.  **Run the App:**
-      * Navigate to `src/App.java`.
-      * Run the `main` method to launch the application window.
 
-## 🔜 Future Roadmap
+2.  **Database Setup:**
+    Open SQL Server Management Studio (SSMS) and run the following script to create the database and table:
 
-This project is actively being developed. Upcoming features include:
+    ```sql
+    CREATE DATABASE expenses_db;
+    GO
+    USE expenses_db;
+    GO
+    CREATE TABLE expenses (
+        id INT IDENTITY(1,1) PRIMARY KEY,
+        description VARCHAR(255) NOT NULL,
+        price MONEY NOT NULL,
+        category VARCHAR(50),
+        date DATE NOT NULL
+    );
+    ```
 
-  * **Persistence:** Integration with **SQL Server** or **Firebase** to save data permanently.
-  * **Data Visualization:** Charts and graphs to analyze spending habits (referencing my background in data analysis).
-  * **Export:** Ability to export reports to PDF or Excel.
+3.  **Configure Connection:**
+    Open `src/database/DBConnection.java` and update the `user` and `password` variables to match your SQL Server credentials:
+    ```java
+    private static final String user = "sa";
+    private static final String password = "YOUR_PASSWORD_HERE";
+    ```
+
+4.  **Run the App:**
+    * Open the project in VS Code.
+    * Navigate to `src/App.java`.
+    * Click **Run** (or press `F5`).
+
+## 📷 Usage
+
+1.  **Main Screen:** Fill in the details (e.g., "Lunch", "15.50", "Food", "2023-10-25") and click **Add Expense**.
+2.  **List View:** Click **View All Expenses** to see the table.
+3.  **Filtering:** In the table view, select a category or type a specific Month/Year and click **Filter** to narrow down results.
 
 ## 👤 Author
 
 **Nicolás del Rio**
+* **Role:** Software Engineering Student & Full-Stack Developer
+* **Email:** Mnicolassebastiandelrio@gmail.com
+* **LinkedIn:** [Nicolás del Rio](https://linkedin.com)
 
-  * **Role:** Software Engineering Student & Full-Stack Developer
-  * **LinkedIn:** [Nicolás del Rio](www.linkedin.com/in/nicolás-del-rio-08810523b)
-  * **Email:** nicolassebastiandelrio@gmail.com
-
------
-
-*This project is part of my professional portfolio to demonstrate competency in Object-Oriented Programming and Software Architecture.*
+---
+*This project is part of my professional portfolio to demonstrate competency in Java, SQL, and Software Architecture.*
