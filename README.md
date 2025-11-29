@@ -79,9 +79,9 @@ The project follows strict software engineering principles:
 ## 👤 Author
 
 **Nicolás del Rio**
-* **Role:** Software Engineering Student & Full-Stack Developer
-* **Email:** Mnicolassebastiandelrio@gmail.com
-* **LinkedIn:** [Nicolás del Rio](https://linkedin.com)
+* **Role:** Software Engineering Student & Continuous improvement intern at Adecco
+* **Email:** nicolassebastiandelrio@gmail.com
+* **LinkedIn:** [Nicolás del Rio](www.linkedin.com/in/nicolás-del-rio-08810523b)
 
 ---
 *This project is part of my professional portfolio to demonstrate competency in Java, SQL, and Software Architecture.*
